@@ -4,22 +4,22 @@ import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use('Agg')
 
-# This is Data from the graph
+# Data from the graph
 x = np.array([-10.00, -8.00, -6.00, -4.00, -2.00, -0.80, 2.00, 4.00, 6.00, 8.00])
 y = np.array([-3.00, -4.00, -2.00, -1.00, 0.70, -1.00, 3.00, 2.00, 4.00, 0.0])
+
 
 r = np.corrcoef(x, y)[0, 1]
 print("Pearson correlation coefficient r =", r)
 
-plt.scatter(x, y, color='blue', label='Data points')
+plt.figure(figsize=(8, 6))
+plt.scatter(x, y, color='blue', label='Data Points (Blue Dots)')
 m, b = np.polyfit(x, y, 1)
-plt.plot(x, m*x + b, color='red', label=f'Fit line: y={m:.2f}x + {b:.2f}')
-plt.xlabel('x')
-plt.ylabel('y')
-plt.title(f'Scatter plot with regression line (r={r:.2f})')
+plt.plot(x, m*x + b, color='red', linestyle='--', label=f'Regression Line (r = {r:.4f})')
+plt.title(f'Correlation Analysis (Pearson r = {r:.4f})')
+plt.xlabel('X Coordinate')
+plt.ylabel('Y Coordinate')
+plt.grid(True, linestyle=':', alpha=0.7)
 plt.legend()
-plt.grid(True)
-
-# Save the graph as a png
-plt.savefig("graph.png")
-print("Graph saved as graph.png")
+plt.savefig('correlation.png')
+plt.show()
